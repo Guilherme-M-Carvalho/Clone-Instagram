@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { BannerComponent } from './banner/banner.component';
 import { LoginComponent } from './login/login.component';
-import { animate, state, style, transition, trigger } from '@angular/animations';
+import { animate, keyframes, state, style, transition, trigger } from '@angular/animations';
 
 @Component({
   selector: 'app-acesso',
@@ -31,7 +31,40 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
           opacity: 0,
           transform: "translate(50px, 0px)"
         }),
-        animate("500ms ease-in-out")
+        animate("500ms ease-in-out", keyframes([
+          style({
+            offset: 0.15,
+            opacity: 1, transform: 'translateX(0)'
+          }),
+          style({
+            offset: 0.86,
+            opacity: 1, transform: 'translateX(0)'
+          }),
+          style({
+            offset: 0.88,
+            opacity: 1, transform: 'translateY(-10px)'
+          }),
+          style({
+            offset: 0.90,
+            opacity: 1, transform: 'translateY(10px)'
+          }),
+          style({
+            offset: 0.92,
+            opacity: 1, transform: 'translateY(-10px)'
+          }),
+          style({
+            offset: 0.94,
+            opacity: 1, transform: 'translateY(10px)'
+          }),
+          style({
+            offset: 0.96,
+            opacity: 1, transform: 'translateY(-10px)'
+          }),
+          style({
+            offset: 0.98,
+            opacity: 1, transform: 'translateY(10px)'
+          }),
+        ]))
       ])
     ])
   ]
@@ -43,6 +76,15 @@ export class AcessoComponent {
 
   toggleCadastro(event: boolean): void {
     this.cadastro = event
+  }
+
+  startAnimate(): void {
+    console.log("start");
+    
+  }
+
+  endAnimate(): void{
+    console.log("end");
   }
 
 }

@@ -3,7 +3,7 @@
     <div class="col-sm-6 d-flex justify-content-end" [@animation-banner]="banner">
       <app-banner></app-banner>
     </div>
-      <div *ngIf="cadastro;else templateLogin" class="col-sm-6 d-flex justify-content-start" [@animation-painel]="banner">
+      <div *ngIf="cadastro;else templateLogin" class="col-sm-6 d-flex justify-content-start" [@animation-painel]="banner" (@animation-painel.start)="startAnimate()" (@animation-painel.done)="endAnimate()">
         <app-cadastro (exibirCadastro)="toggleCadastro($event)"></app-cadastro>
       </div>
     <ng-template #templateLogin>
