@@ -1,7 +1,7 @@
 <div class="card" style="width: 20rem;">
   <div class="card-body">
     <div class="card-title"></div>
-    <form [formGroup]="formulario" (ngSubmit)="authentication()">
+    <form [formGroup]="formulario" class="d-flex gap-2 flex-column" (ngSubmit)="authentication()">
       <div class="form-group">
         <input type="email" class="form-control" placeholder="E-mail" formControlName="email">
       </div>

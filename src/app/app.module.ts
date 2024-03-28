@@ -15,13 +15,15 @@ import { Authenticacao } from './authenticacao.service';
 import { PublicacoesComponent } from './home/publicacoes/publicacoes.component';
 import { HomeComponent } from './home/home.component';
 import { AuthenticacaoGuard } from './authenticacao-guard.service';
-
+import { IncluirPublicacaoComponent } from './home/incluir-publicacao/incluir-publicacao.component';
+import { Bd } from './bd.service';
+import { Progresso } from './progresso.service';
 
 // @NgModule decorator with its metadata
 @NgModule({
-    declarations: [AppComponent, AcessoComponent, BannerComponent, CadastroComponent, LoginComponent, PublicacoesComponent, HomeComponent],
+    declarations: [AppComponent, AcessoComponent, BannerComponent, CadastroComponent, LoginComponent, PublicacoesComponent, HomeComponent, IncluirPublicacaoComponent],
     imports: [BrowserModule, HttpClientModule, RouterModule.forRoot(routes), BrowserAnimationsModule, ReactiveFormsModule],
-    providers: [Authenticacao, AuthenticacaoGuard],
+    providers: [Authenticacao, AuthenticacaoGuard, Bd, Progresso],
     bootstrap: [AppComponent]
 })
 export class AppModule { }

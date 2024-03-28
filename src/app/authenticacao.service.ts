@@ -52,6 +52,18 @@ export class Authenticacao {
             this.token_id = tokenIdLocal
         }
 
+        if(!this.token_id) this.router.navigate(['/'])
+
         return !!this.token_id
     }
+
+
+    public logout(){
+        firebase.auth().signOut().then(() => {
+            localStorage.removeItem('token_id')
+            this.token_id = undefined
+            this.router.navigate(["/"])
+        })
+    }
+
 }

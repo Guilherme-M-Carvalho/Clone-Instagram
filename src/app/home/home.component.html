@@ -1,11 +1,17 @@
 <nav class="navbar fixed-top navbar-light bg-white">
-    <div class="container">
-      <div class="logo"></div>
-      <div class="add-post"></div>
-    </div>  
-  </nav>
-  
-  <br /><br /><br />
   <div class="container">
-    <app-publicacoes></app-publicacoes>   
+    <div class="logo"></div>
+    <div>
+      <div class="add-post btn" data-bs-toggle="modal" data-bs-target="#exampleModal"></div>
+      <button class="btn ms-2 text-decoration-none" (click)="logout()">
+        Sair
+      </button>
+    </div>
   </div>
+</nav>
+
+<br /><br /><br />
+<div class="container">
+  <app-publicacoes></app-publicacoes>
+</div>
+<app-incluir-publicacao />
