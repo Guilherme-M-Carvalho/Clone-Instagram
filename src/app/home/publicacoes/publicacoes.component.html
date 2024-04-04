@@ -2,14 +2,14 @@
     <div class="col d-flex justify-content-center">
         <div class="card">
             <div class="card-body">
-                <p class="card-text"><strong>{{pub.user.nome_completo}}</strong></p>
+                <p class="card-text"><strong>{{pub?.nome_completo}}</strong></p>
             </div>
 
             <img class="card-img" [src]="pub.url_imagem" />
 
             <div class="card-body">
                 <p class="card-text">
-                    <strong>{{pub.user.nome_usuario}}</strong> {{pub.titulo}}
+                    <strong>{{pub?.nome_usuario}}</strong> {{pub.titulo}}
                 </p>
 
                 <hr />

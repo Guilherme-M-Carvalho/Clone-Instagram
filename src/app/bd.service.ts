@@ -38,35 +38,54 @@ export class Bd {
 
     public consultar(email: string): Promise<any> {
 
-        return new Promise((resolve,rej) => {
+        return new Promise((resolve, rej) => {
 
             firebase.database().ref(`publicacao/${btoa(email)}`)
-               .once('value')
-               .then((res) => {
-                   // console.log(res.val());
-   
-                   const pubs: any[] = []
-                   res.forEach((el) => {
-                       const val = el.val()
-                       console.log(el.key);
-                       
-                       firebase.storage().ref()
-                           .child(`imagens/${el.key}`)
-                           .getDownloadURL()
-                           .then((response) => {
-                               console.log(btoa(email), email);
-                               
-                               firebase.database().ref(`usuario_detalhe/${btoa(email)}`)
-                               .once('value')
-                               .then((snap: any) => {
-                                   // console.log(snap.val());
-                                   pubs.push({...val, url_imagem: response, ...snap.val()})
-                                   
-                               })
-                           })
-                   })
-                   resolve(pubs);
-               })
+                .orderByKey()
+                .once('value')
+                .then((res) => {
+                    // console.log(res.val());
+                    const pubs: any[] = []
+                    res.forEach((el) => {
+                        const val = el.val()
+                        console.log({val});
+                        
+                        val.key = el.key
+                        pubs.push(val)
+
+                    })
+                    // resolve(pubs);
+                    return pubs.reverse()
+                })
+                .then((result) => {
+                    result.forEach(el => {
+
+                        firebase.storage().ref()
+                        .child(`imagens/${el.key}`)
+                        .getDownloadURL()
+                        .then((response) => {
+                    
+                            firebase.database().ref(`usuario_detalhe/${btoa(email)}`)
+                                .once('value')
+                                .then((snap: any) => {
+                                    el.url_imagem = response
+                                    const user = snap.val()
+                                    
+                                    el.nome_completo = user.user.nome_completo
+                                    el.nome_usuario = user.user.nome_usuario
+                                    el.email = user.user.email
+                                    // pubs.push({ , url_imagem: response, })
+                    
+                                })
+                        })
+                    })
+                    resolve(result)
+                    
+                })
         })
     }
 }
+
+
+// console.log(el.key);
+

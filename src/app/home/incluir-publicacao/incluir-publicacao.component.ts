@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Bd } from '../../bd.service';
 import firebase from 'firebase/compat/app';
@@ -14,6 +14,8 @@ import { Subject, interval, takeUntil } from 'rxjs';
   styleUrl: './incluir-publicacao.component.scss'
 })
 export class IncluirPublicacaoComponent implements OnInit {
+
+  @Output() public atualizarTime: EventEmitter<any> =  new EventEmitter()
 
   public formulario: FormGroup = new FormGroup({
     "titulo": new FormControl(null)
@@ -49,8 +51,9 @@ export class IncluirPublicacaoComponent implements OnInit {
         this.porcentagemUpload = Math.round((this.progresso.estado.bytesTransferred / this.progresso.estado.totalBytes) * 100)
         this.progressoPub = "andamento"
         if (this.progresso.status == "Finalizado") {
-          subject.next(false)
           this.progressoPub = "Finalizado"
+          this.atualizarTime.emit()
+          subject.next(false)
         }
       })
     // takeUntil(subject)
